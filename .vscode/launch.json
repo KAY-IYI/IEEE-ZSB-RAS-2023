@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "e:/IYI_2/Projects/AVR/DIO/MCAL/DIO",
-      "program": "e:/IYI_2/Projects/AVR/DIO/MCAL/DIO/build/Debug/outDebug",
+      "cwd": "c:/Users/abdoy/IEEE-ZSB-RAS-2023",
+      "program": "c:/Users/abdoy/IEEE-ZSB-RAS-2023/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

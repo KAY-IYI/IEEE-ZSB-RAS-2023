@@ -6,30 +6,13 @@
 /*************************** version  :  1.0            **************************************/
 /*********************************************************************************************/
 
-#ifndef DIO_REGISTERS_H
-#define DIO_REGISTERS_H
+#ifndef DIO_PRIVATE_H
+#define DIO_PRIVATE_H
 
 #include"../../LIB/STD_TYPES.h"
 
-/****************** PORTA Registers ************************/
-#define DIO_u8_PORTA_REG	                              *((u8 volatile *)0x3B)  
-#define DIO_u8_DDRA_REG                                   *((u8 volatile *)0x3A)  
-#define DIO_u8_PINA_REG	                                  *((u8 volatile *)0x39)
-
-/****************** PORTB Registers ************************/
-#define DIO_u8_PORTB_REG	                              *((u8 volatile *)0x38)  
-#define DIO_u8_DDRB_REG                                   *((u8 volatile *)0x37)  
-#define DIO_u8_PINB_REG	                                  *((u8 volatile *)0x36)
-
-/****************** PORTC Registers ************************/
-#define DIO_u8_PORTC_REG	                              *((u8 volatile *)0x35)  
-#define DIO_u8_DDRC_REG                                   *((u8 volatile *)0x34)  
-#define DIO_u8_PINC_REG	                                  *((u8 volatile *)0x33)
-
-/****************** PORTD Registers ************************/
-#define DIO_u8_PORTD_REG	                              *((u8 volatile *)0x32)  
-#define DIO_u8_DDRD_REG                                   *((u8 volatile *)0x31)  
-#define DIO_u8_PIND_REG	                                  *((u8 volatile *)0x30)
+#include"DIO_Register.h"
+#include"DIO_Confiq.h"
 
 /****************** Pins Direction & Values ****************/
 #define DIO_u8_INITIAL_OUTPUT                             1

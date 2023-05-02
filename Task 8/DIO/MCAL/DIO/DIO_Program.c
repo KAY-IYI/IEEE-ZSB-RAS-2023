@@ -3,7 +3,7 @@
 /*************************** Data     :  29/4/2023      **************************************/
 /*************************** SWC      :  DIO            **************************************/
 /*************************** E_Mail   :  karamyaseen725@gmail.com    *************************/
-/*************************** version  :  1.0            **************************************/
+/*************************** version  :  1.5            **************************************/
 /*********************************************************************************************/
 
 /*HEADERS INCLUDED*/
@@ -14,9 +14,10 @@
     /* MCAL */
     #include "DIO_Interface.h"
     #include "DIO_Private.h"
+    #include "DIO_Register.h"
     #include "DIO_Confiq.h"
     
-    void DIO_VoidInit  (void)
+    void DIO_VoidInit         (void)
         {
             DIO_u8_DDRA_REG = CONC(DIO_u8_PA7_INITIAL_DIRECTION,DIO_u8_PA6_INITIAL_DIRECTION,DIO_u8_PA5_INITIAL_DIRECTION,DIO_u8_PA4_INITIAL_DIRECTION,
                                 DIO_u8_PA3_INITIAL_DIRECTION,DIO_u8_PA2_INITIAL_DIRECTION,DIO_u8_PA1_INITIAL_DIRECTION,DIO_u8_PA0_INITIAL_DIRECTION);
@@ -31,7 +32,7 @@
                                 DIO_u8_PD3_INITIAL_DIRECTION,DIO_u8_PD2_INITIAL_DIRECTION,DIO_u8_PD1_INITIAL_DIRECTION,DIO_u8_PD0_INITIAL_DIRECTION);
 
             DIO_u8_PORTA_REG = CONC(DIO_u8_PA7_INITIAL_VALUE,DIO_u8_PA6_INITIAL_VALUE,DIO_u8_PA5_INITIAL_VALUE,DIO_u8_PA4_INITIAL_VALUE,
-                                DIO_u8_PA3_INITIAL_VALUE,DIO_u8_PA2_INITIAL_VALUE,DIO_u8_PA1_INITIAL_VALUE,DIO_u8_PA0_INITIAL_VALUE);
+            		DIO_u8_PA3_INITIAL_VALUE,DIO_u8_PA2_INITIAL_VALUE,DIO_u8_PA1_INITIAL_VALUE,DIO_u8_PA0_INITIAL_VALUE);
 
             DIO_u8_PORTB_REG = CONC(DIO_u8_PB7_INITIAL_VALUE,DIO_u8_PB6_INITIAL_VALUE,DIO_u8_PB5_INITIAL_VALUE,DIO_u8_PB4_INITIAL_VALUE,
                                 DIO_u8_PB3_INITIAL_VALUE,DIO_u8_PB2_INITIAL_VALUE,DIO_u8_PB1_INITIAL_VALUE,DIO_u8_PB0_INITIAL_VALUE);
@@ -61,10 +62,9 @@
                 Local_u8_ErrorState = STD_TYPES_NOK;
             }
             return Local_u8_ErrorState;
+        	}
 
-        }
-
-    u8 DIO_u8SetPinValue  (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinValue)
+    u8 DIO_u8SetPinValue      (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId <= DIO_u8_PORTD) && (Copy_u8_PinId <= DIO_u8_PIN7) && ((Copy_u8_PinValue == DIO_u8_HIGH)||(Copy_u8_PinValue == DIO_u8_LOW))){
@@ -108,7 +108,7 @@
 
         }
 
-    u8 DIO_u8GetPinValue  (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinValue)
+    u8 DIO_u8GetPinValue      (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             u8 Local_u8_PinValue ;
@@ -142,7 +142,40 @@
 
         }
 
-    u8 DIO_u8SetPortDirection  (u8 Copy_u8_PortId,u8 Copy_u8_PortDirection)
+    u8 DIO_u8GetPinDir        (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinDirection)
+    {
+            u8 Local_u8_ErrorState = STD_TYPES_OK;
+            u8 Local_u8_PinDirection;
+            if((Copy_u8_PortId <= DIO_u8_PORTD) && (Copy_u8_PinId <= DIO_u8_PIN7) && (Copy_pu8_ReturnPinDirection != NULL))
+            {
+                switch (Copy_u8_PortId)
+                {
+                    case DIO_u8_PORTA:		Local_u8_PinDirection = BIT_GET(DIO_u8_PINA_REG,Copy_u8_PinId);
+											if(Local_u8_PinDirection == STD_TYPES_OK) {*Copy_pu8_ReturnPinDirection = DIO_u8_INPUT;}
+											else {*Copy_pu8_ReturnPinDirection = DIO_u8_OUTPUT;}
+                    break;
+                    case DIO_u8_PORTB:      Local_u8_PinDirection = BIT_GET(DIO_u8_PINB_REG,Copy_u8_PinId);
+											if(Local_u8_PinDirection == STD_TYPES_OK) {*Copy_pu8_ReturnPinDirection = DIO_u8_INPUT;}
+											else {*Copy_pu8_ReturnPinDirection = DIO_u8_OUTPUT;}
+					break;
+                    case DIO_u8_PORTC:      Local_u8_PinDirection = BIT_GET(DIO_u8_PINC_REG,Copy_u8_PinId);
+											if(Local_u8_PinDirection == STD_TYPES_OK) {*Copy_pu8_ReturnPinDirection = DIO_u8_INPUT;}
+											else {*Copy_pu8_ReturnPinDirection = DIO_u8_OUTPUT;}
+					break;
+                    case DIO_u8_PORTD:      Local_u8_PinDirection = BIT_GET(DIO_u8_PIND_REG,Copy_u8_PinId);
+											if(Local_u8_PinDirection == STD_TYPES_OK) {*Copy_pu8_ReturnPinDirection = DIO_u8_INPUT;}
+											else {*Copy_pu8_ReturnPinDirection = DIO_u8_OUTPUT;}
+					break;
+                }
+            }
+            else
+            {
+                Local_u8_ErrorState = STD_TYPES_NOK;
+            }
+            return Local_u8_ErrorState;
+    }
+
+    u8 DIO_u8SetPortDirection (u8 Copy_u8_PortId,u8 Copy_u8_PortDirection)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId <= DIO_u8_PORTD) &&((Copy_u8_PortDirection == DIO_u8_OUTPUT)||(Copy_u8_PortDirection == DIO_u8_INPUT))){
@@ -179,11 +212,11 @@
                 }
             }else{
                 Local_u8_ErrorState = STD_TYPES_NOK;
-            }
+            	}
             return Local_u8_ErrorState;
         }
 
-    u8 DIO_u8SetPortValue  (u8 Copy_u8_PortId,u8 Copy_u8_PortValue)
+    u8 DIO_u8SetPortValue     (u8 Copy_u8_PortId,u8 Copy_u8_PortValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId <= DIO_u8_PORTD) &&((Copy_u8_PortValue == DIO_u8_HIGH)||(Copy_u8_PortValue == DIO_u8_LOW))){
@@ -191,10 +224,10 @@
                 {
                 case DIO_u8_PORTA:
                     switch (Copy_u8_PortValue)
-                    {
-                    case DIO_u8_HIGH: DIO_u8_PORTA_REG = 0xff; break;
-                    case DIO_u8_LOW : DIO_u8_PORTA_REG = 0x00; break;
-                    }
+                        {
+                        case DIO_u8_HIGH: DIO_u8_PORTA_REG = 0xff; break;
+                        case DIO_u8_LOW : DIO_u8_PORTA_REG = 0x00; break;
+                        }
                 break;
                 case DIO_u8_PORTB:
                     switch (Copy_u8_PortValue)
@@ -222,10 +255,9 @@
                 Local_u8_ErrorState = STD_TYPES_NOK;
             }
             return Local_u8_ErrorState;
-
         }
 
-    u8 DIO_u8GetPortValue  (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue)
+    u8 DIO_u8GetPortValue     (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId<= DIO_u8_PORTD) && (Copy_pu8_ReturnPortValue != NULL)){

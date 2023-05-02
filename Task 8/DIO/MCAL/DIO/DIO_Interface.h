@@ -17,8 +17,8 @@
 /* MACROS FOR PORTS */
     #define DIO_u8_PORTA   0
     #define DIO_u8_PORTB   1
-    #define DIO_u8_PORTD   2
-    #define DIO_u8_PORTC   3
+    #define DIO_u8_PORTC   2
+    #define DIO_u8_PORTD   3
 
 /* MACROS FOR PINS */
     #define DIO_u8_PIN0     0
@@ -34,9 +34,13 @@
     #define DIO_u8_OUTPUT  1
     #define DIO_u8_INPUT   0
 
+    #define DIO_u8_PORT_INPUTDIR  0x00
+    #define DIO_u8_PORT_OUTPUTDIR 0xFF
+
 /* MACROS FOR PINS VALUE */        
     #define DIO_u8_HIGH    1
     #define DIO_u8_LOW     0
+
 
 /* =========================================================================================== */
 /*                                Function modules                                             */
@@ -44,16 +48,18 @@
    
     void DIO_VoidInit                   (void);
 
-    u8 DIO_u8SetPinDirection            (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinDirection);
+    u8  DIO_u8SetPinDirection            (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinDirection);
 
-    u8 DIO_u8SetPinValue                (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinValue);
+    u8  DIO_u8SetPinValue                (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinValue);
 
-    u8 DIO_u8GetPinValue                (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinValue);
+    u8  DIO_u8GetPinValue                (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinValue);
+    
+    u8  DIO_u8GetPinDir                  (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinDirection);
 
-    u8 DIO_u8SetPortDirection           (u8 Copy_u8_PortId,u8 Copy_u8_PortDirection);
+    u8  DIO_u8SetPortDirection           (u8 Copy_u8_PortId,u8 Copy_u8_PortDirection);
 
-    u8 DIO_u8SetPortValue               (u8 Copy_u8_PortId,u8 Copy_Port_Value);
+    u8  DIO_u8SetPortValue               (u8 Copy_u8_PortId,u8 Copy_Port_Value);
 
-    u8 DIO_u8GetPortValue               (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue);
+    u8  DIO_u8GetPortValue               (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue);
 
 #endif
