@@ -8,10 +8,10 @@
 
 /*HEADERS INCLUDED*/
     /*Lib Layer*/
-    #include "STD_TYPES.h"
-    #include "BIT_MATH.h"
-	#include "Error_State.h"
-    /* MCAL */
+    #include "../../lib/BIT_MATH.h"
+    #include "../../lib/Error_State.h"
+    #include "../../lib/STD_TYPES.h"
+  	/* MCAL */
     #include "DIO_Private.h"
     #include "DIO_Confiq.h"
     

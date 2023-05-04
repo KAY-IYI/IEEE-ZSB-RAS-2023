@@ -9,9 +9,9 @@
 #ifndef DIO_PRIVATE_H
 #define DIO_PRIVATE_H
 
-#include"STD_TYPES.h"
+#include "../../lib/BIT_MATH.h"
 #include "DIO_Register.h"
-#include"DIO_Confiq.h"
+#include "DIO_Confiq.h"
 
 
 /* MACROS FOR PORTS */

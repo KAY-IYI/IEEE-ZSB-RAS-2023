@@ -8,7 +8,7 @@
 #ifndef DIO_INTERFACE_H
 #define DIO_INTERFACE_H
 
-#include "Error_State.h"s
+#include "../../lib/Error_State.h"
 
 /* =========================================================================================== */
 /*                                Macros DEfinitions                                           */ 
