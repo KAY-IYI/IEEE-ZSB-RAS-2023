@@ -8,16 +8,14 @@
 
 /*HEADERS INCLUDED*/
     /*Lib Layer*/
-    #include "../../LIB/STD_TYPES.h"
-    #include"../../LIB/BIT_MATH.h"
-
+    #include "STD_TYPES.h"
+    #include "BIT_MATH.h"
+	#include "Error_State.h"
     /* MCAL */
-    #include "DIO_Interface.h"
     #include "DIO_Private.h"
-    #include "DIO_Register.h"
     #include "DIO_Confiq.h"
     
-    void DIO_VoidInit         (void)
+    ES_t DIO_enu_Init          	  (void)
         {
             DIO_u8_DDRA_REG = CONC(DIO_u8_PA7_INITIAL_DIRECTION,DIO_u8_PA6_INITIAL_DIRECTION,DIO_u8_PA5_INITIAL_DIRECTION,DIO_u8_PA4_INITIAL_DIRECTION,
                                 DIO_u8_PA3_INITIAL_DIRECTION,DIO_u8_PA2_INITIAL_DIRECTION,DIO_u8_PA1_INITIAL_DIRECTION,DIO_u8_PA0_INITIAL_DIRECTION);
@@ -42,9 +40,10 @@
 
             DIO_u8_PORTD_REG = CONC(DIO_u8_PD7_INITIAL_VALUE,DIO_u8_PD6_INITIAL_VALUE,DIO_u8_PD5_INITIAL_VALUE,DIO_u8_PD4_INITIAL_VALUE,
                                 DIO_u8_PD3_INITIAL_VALUE,DIO_u8_PD2_INITIAL_VALUE,DIO_u8_PD1_INITIAL_VALUE,DIO_u8_PD0_INITIAL_VALUE);       
+        return STD_TYPES_OK;
         }
 
-    u8 DIO_u8SetPinDirection  (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinDirection)
+    ES_t DIO_enu_SetPinDirection  (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinDirection)
         {
                     
             u8 Local_u8_ErrorState = STD_TYPES_OK;
@@ -64,7 +63,7 @@
             return Local_u8_ErrorState;
         	}
 
-    u8 DIO_u8SetPinValue      (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinValue)
+    ES_t DIO_enu_SetPinValue      (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId <= DIO_u8_PORTD) && (Copy_u8_PinId <= DIO_u8_PIN7) && ((Copy_u8_PinValue == DIO_u8_HIGH)||(Copy_u8_PinValue == DIO_u8_LOW))){
@@ -108,7 +107,7 @@
 
         }
 
-    u8 DIO_u8GetPinValue      (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinValue)
+    ES_t DIO_enu_GetPinValue      (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             u8 Local_u8_PinValue ;
@@ -142,7 +141,7 @@
 
         }
 
-    u8 DIO_u8GetPinDir        (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinDirection)
+    ES_t DIO_enu_GetPinDir        (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 * Copy_pu8_ReturnPinDirection)
     {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             u8 Local_u8_PinDirection;
@@ -175,7 +174,7 @@
             return Local_u8_ErrorState;
     }
 
-    u8 DIO_u8SetPortDirection (u8 Copy_u8_PortId,u8 Copy_u8_PortDirection)
+    ES_t DIO_enu_SetPortDirection (u8 Copy_u8_PortId,u8 Copy_u8_PortDirection)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId <= DIO_u8_PORTD) &&((Copy_u8_PortDirection == DIO_u8_OUTPUT)||(Copy_u8_PortDirection == DIO_u8_INPUT))){
@@ -216,7 +215,7 @@
             return Local_u8_ErrorState;
         }
 
-    u8 DIO_u8SetPortValue     (u8 Copy_u8_PortId,u8 Copy_u8_PortValue)
+    ES_t DIO_enu_SetPortValue     (u8 Copy_u8_PortId,u8 Copy_u8_PortValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId <= DIO_u8_PORTD) &&((Copy_u8_PortValue == DIO_u8_HIGH)||(Copy_u8_PortValue == DIO_u8_LOW))){
@@ -257,7 +256,7 @@
             return Local_u8_ErrorState;
         }
 
-    u8 DIO_u8GetPortValue     (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue)
+    ES_t DIO_enu_GetPortValue     (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
             if((Copy_u8_PortId<= DIO_u8_PORTD) && (Copy_pu8_ReturnPortValue != NULL)){

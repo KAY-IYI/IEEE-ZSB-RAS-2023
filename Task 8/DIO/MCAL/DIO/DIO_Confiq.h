@@ -54,7 +54,7 @@
 
 /*Initial Values For All Pins*/
 /*Options: DIO_u8_OUTPUT_HIGH
-           DIO_u8_OUTPIT_LOW
+           DIO_u8_OUTPUT_LOW
            DDIO_u8_INPUT_FLOATING
            DIO_u8_INPUT_PULLUP
            */

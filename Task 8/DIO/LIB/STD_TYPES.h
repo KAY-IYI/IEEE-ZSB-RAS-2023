@@ -12,8 +12,7 @@ typedef signed long  int   s32 ;
 typedef float               f32;
 typedef double              f64;
 
-#define STD_TYPES_OK          1
-#define STD_TYPES_NOK         0
+#define INITIAL_VALUE         0
 
 #define NULL          ((void*)0)
 
