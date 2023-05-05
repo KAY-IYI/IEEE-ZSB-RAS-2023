@@ -11,22 +11,21 @@
 #include "../lib/STD_TYPES.h"
 #include <util/delay.h>
 
-
 int main(){
 
-	DIO_VoidInit();
+	DIO_enu_Init();
 
 	/*******************Pins Directions********************/
-	DIO_eun_SetPinDirection(DIO_u8_PORTA,DIO_u8_PIN0,DIO_u8_INPUT);
-	DIO_eun_SetPinDirection(DIO_u8_PORTA,DIO_u8_PIN5,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(DIO_u8_PORTA,DIO_u8_PIN0,DIO_u8_INPUT);
+	DIO_enu_SetPinDirection(DIO_u8_PORTA,DIO_u8_PIN5,DIO_u8_OUTPUT);
 
-	DIO_eun_SetPinDirection(DIO_u8_PORTB,DIO_u8_PIN0,DIO_u8_INPUT );
-	DIO_eun_SetPinDirection(DIO_u8_PORTB,DIO_u8_PIN3,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(DIO_u8_PORTB,DIO_u8_PIN0,DIO_u8_INPUT );
+	DIO_enu_SetPinDirection(DIO_u8_PORTB,DIO_u8_PIN3,DIO_u8_OUTPUT);
 
-	DIO_eun_SetPinDirection(DIO_u8_PORTC,DIO_u8_PIN0,DIO_u8_INPUT);
-	DIO_eun_SetPinDirection(DIO_u8_PORTC,DIO_u8_PIN3,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(DIO_u8_PORTC,DIO_u8_PIN0,DIO_u8_INPUT);
+	DIO_enu_SetPinDirection(DIO_u8_PORTC,DIO_u8_PIN3,DIO_u8_OUTPUT);
 
-	DIO_eun_SetPortDirection(DIO_u8_PORTD,DIO_u8_OUTPUT);
+	DIO_enu_SetPortDirection(DIO_u8_PORTD,DIO_u8_OUTPUT);
 
 	u8 switchRead1;
 	u8 switchRead2;
