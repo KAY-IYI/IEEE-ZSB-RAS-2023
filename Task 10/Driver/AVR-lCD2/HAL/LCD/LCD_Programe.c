@@ -24,39 +24,38 @@
 
 #include <util/delay.h>
 
-static u8 Copy_u8_mode_flag; // HIGH if 8 bit mode, LOW if 4 bit mode
 
 ES_t LCD_enu_SendCommand  (u8 Copy_u8_command)
  {
-if (Copy_u8_mode_flag==LCD_u8_8BIT_MODE)
+if (COPY_MODE_flag==LCD_u8_8BIT_MODE)
 {
 	/*RS=0*/
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_LOW);
 	/*RW=0*/
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_LOW);
 
-	DIO_enu_SetPortValue(LCD_u8_DATA_PORT,Copy_u8_command);
+	DIO_enu_SetPortValue_v2(LCD_u8_DATA_PORT,Copy_u8_command);
 	/*Sending enable signal*/
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH);
 	_delay_us(2);
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW);
 
 }
-else if ( Copy_u8_mode_flag == LCD_u8_4BIT_MODE) {
+else if ( COPY_MODE_flag == LCD_u8_4BIT_MODE) {
 
 
     DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_LOW);
 
     DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_LOW);
     //first
-    DIO_enu_SetPortValue(LCD_u8_DATA_PORT,Copy_u8_command);
+    DIO_enu_SetPortValue_v2(LCD_u8_DATA_PORT,Copy_u8_command);
 
     DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH );
     _delay_us(2);
 
     DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW );
     //shift
-    DIO_enu_SetPortValue(LCD_u8_DATA_PORT,Copy_u8_command << SHIFT_4BIT);
+    DIO_enu_SetPortValue_v2(LCD_u8_DATA_PORT,Copy_u8_command << SHIFT_4BIT);
 
     DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH );
     _delay_us(2);
@@ -66,7 +65,6 @@ else if ( Copy_u8_mode_flag == LCD_u8_4BIT_MODE) {
 	return STD_TYPES_OK;
 
 }
-
 
 ES_t LCD_enu_Init_8bit_Mode(void)
  {
@@ -96,7 +94,7 @@ ES_t LCD_enu_Init_8bit_Mode(void)
 
 	LCD_enu_SendCommand(LCD_ENTRY_MODE);
 
-	Copy_u8_mode_flag=LCD_u8_8BIT_MODE;
+//	COPY_MODE_flag=LCD_u8_8BIT_MODE;
 
 	return STD_TYPES_OK;
 }
@@ -117,38 +115,38 @@ ES_t LCD_enu_Init_4bit_Mode(void)
 	/* Delay 35ms to ensure the initialization of the LCD driver */
 	_delay_ms(35);
 
-	LCD_vidSendCommand_4_bit(LCD_HOME);
+	LCD_enu_SendCommand(LCD_HOME);
 	_delay_ms(15);
 
-	LCD_vidSendCommand_4_bit(LCD_FUNCTION_SET_4BIT_MODE);
+	LCD_enu_SendCommand(LCD_FUNCTION_SET_4BIT_MODE);
 	_delay_us(40);
 
 	/* Display ON OFF Control */
-	LCD_vidSendCommand_4_bit(LCD_DISPLAY_ON);
+	LCD_enu_SendCommand(LCD_DISPLAY_ON);
 	_delay_ms(2);
 
 	/* Clear Display */
-	LCD_vidSendCommand_4_bit(LCD_CLEAR_SCREEN);
+	LCD_enu_SendCommand(LCD_CLEAR_SCREEN);
 	_delay_ms(15);
 
 	/* Entry Mode Set  */
-	LCD_vidSendCommand_4_bit(LCD_ENTRY_MODE);
+	LCD_enu_SendCommand(LCD_ENTRY_MODE);
 	_delay_ms(2);
 
-	Copy_u8_mode_flag=LCD_u8_4BIT_MODE;
+//	COPY_MODE_flag=LCD_u8_4BIT_MODE;
 	return STD_TYPES_OK;
 
 }
 
 ES_t LCD_enu_WriteCharacter(u8 Copy_u8_char)
 {
-	if (Copy_u8_mode_flag==LCD_u8_8BIT_MODE)
+	if (COPY_MODE_flag==LCD_u8_8BIT_MODE)
 	{
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_HIGH);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_LOW);
 
-	DIO_enu_SetPortValue(LCD_u8_DATA_PORT,Copy_u8_char);
+    DIO_enu_SetPortValue_v2(LCD_u8_DATA_PORT,Copy_u8_char);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH);
 	_delay_us(1);
@@ -157,20 +155,20 @@ ES_t LCD_enu_WriteCharacter(u8 Copy_u8_char)
 //	_delay_ms(5);
 	}
 
-	else if ( Copy_u8_mode_flag == LCD_u8_4BIT_MODE) {
+	else if ( COPY_MODE_flag == LCD_u8_4BIT_MODE) {
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_HIGH);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_LOW);
 
-	DIO_enu_SetPortValue(LCD_u8_DATA_PORT,Copy_u8_char);
+    DIO_enu_SetPortValue_v2(LCD_u8_DATA_PORT,Copy_u8_char);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH );
 	_delay_us(1);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW );
 
-	DIO_enu_SetPortValue(LCD_u8_DATA_PORT,Copy_u8_char << SHIFT_4BIT);
+    DIO_enu_SetPortValue_v2(LCD_u8_DATA_PORT,Copy_u8_char << SHIFT_4BIT);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH );
 	_delay_us(1);
@@ -281,8 +279,8 @@ ES_t LCD_enu_GoToXY(u8 Copy_u8_LineNumber, u8 Copy_u8_Location) {
 	if(Copy_u8_Location<=MAX_LOCATION)
 	{
 		switch(Copy_u8_LineNumber) {
-			case LCD_u8_LINE0:LCD_enu_SendCommand(ADDRESS_OF_LINE1+Copy_u8_Location);break;
-			case LCD_u8_LINE1:LCD_enu_SendCommand(ADDRESS_OF_LINE0+Copy_u8_Location);break;
+			case LCD_u8_LINE0:LCD_enu_SendCommand(ADDRESS_OF_LINE0+Copy_u8_Location);break;
+			case LCD_u8_LINE1:LCD_enu_SendCommand(ADDRESS_OF_LINE1+Copy_u8_Location);break;
 			default: return STD_TYPES_NOK;
 		}
 	}else{
@@ -291,15 +289,21 @@ ES_t LCD_enu_GoToXY(u8 Copy_u8_LineNumber, u8 Copy_u8_Location) {
 	return STD_TYPES_OK;
 }
 
-ES_t LCD_enu_CreateCustomChar(u8 * Copy_pu8_Char, u8 Copy_u8_Location) {
-	u8 Local_u8_iterator = INITIAL_VALUE;
-	LCD_enu_SendCommand(ADDRESS_OF_CGRAM + (Copy_u8_Location*MAX_CHAR)); /*Command 0x40 and onwards forces to point CGRAM address*/
-	while (Local_u8_iterator != MAX_CHAR) {
-		LCD_enu_WriteCharacter(*Copy_pu8_Char++);
-		Local_u8_iterator++;
-	}
-	LCD_enu_WriteCharacter(0x00+Copy_u8_Location);
-	return STD_TYPES_OK;
+ES_t LCD_enu_CreateCustomChar( u8 Copy_u8_Location,u8 * Copy_pu8_Char) {
+	if (Copy_pu8_Char != NULL && Copy_u8_Location < MAX_CHAR)
+	    {
+		LCD_enu_SendCommand(ADDRESS_OF_CGRAM + (Copy_u8_Location * MAX_CHAR));
+	        for (u8 Local_u8_Counter = 0; Local_u8_Counter < MAX_CHAR; Local_u8_Counter++)
+	        {
+	        	LCD_enu_WriteCharacter(Copy_pu8_Char[Local_u8_Counter]);
+	        }
+	        LCD_enu_GoToXY(0,0);
+	        return STD_TYPES_OK;
+	    }
+	    else
+	        {
+	        return STD_TYPES_NOK;
+	        }
 }
 
 ES_t LCD_vidClearSpace(u8 Copy_u8_xPosStart, u8 Copy_u8_xPosEnd ,u8 Copy_u8_yPos)

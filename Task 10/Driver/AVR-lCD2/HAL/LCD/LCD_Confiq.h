@@ -20,6 +20,7 @@
 #define LCD_u8_RW_PIN                      DIO_u8_PIN1
 #define LCD_u8_E_PIN                       DIO_u8_PIN2
 
-#define LCD_u8_DATA_PORT                   DIO_u8_PORTD
+#define LCD_u8_DATA_PORT                   DIO_u8_PORTB
 
+#define COPY_MODE_flag                 	   LCD_u8_8BIT_MODE
 #endif

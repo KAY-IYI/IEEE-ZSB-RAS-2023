@@ -61,6 +61,8 @@
 
     ES_t  DIO_enu_SetPortValue               (u8 Copy_u8_PortId,u8 Copy_Port_Value);
 
+    ES_t DIO_enu_SetPortValue_v2             (u8 Copy_u8_PortId, u8 Copy_u8_PortValue);
+
     ES_t  DIO_enu_GetPortValue               (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue);
 
 #endif

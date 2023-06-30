@@ -256,6 +256,25 @@
             return Local_u8_ErrorState;
         }
 
+
+    ES_t DIO_enu_SetPortValue_v2(u8 Copy_u8_PortId, u8 Copy_u8_PortValue){
+	u8 Local_u8_ErrorState = STD_TYPES_OK;
+	    if((Copy_u8_PortId <= DIO_u8_PORTD)){
+	        switch (Copy_u8_PortId)
+	        {
+	        case DIO_u8_PORTA:DIO_u8_PORTA_REG = Copy_u8_PortValue; break;
+	        case DIO_u8_PORTB:DIO_u8_PORTB_REG = Copy_u8_PortValue; break;
+	        case DIO_u8_PORTC:DIO_u8_PORTC_REG = Copy_u8_PortValue; break;
+	        case DIO_u8_PORTD:DIO_u8_PORTD_REG = Copy_u8_PortValue; break;
+	        }
+	    }else{
+	        Local_u8_ErrorState = STD_TYPES_NOK;
+	    }
+	    return Local_u8_ErrorState;
+}
+
+
+
     ES_t DIO_enu_GetPortValue     (u8 Copy_u8_PortId,u8 * Copy_pu8_ReturnPortValue)
         {
             u8 Local_u8_ErrorState = STD_TYPES_OK;
