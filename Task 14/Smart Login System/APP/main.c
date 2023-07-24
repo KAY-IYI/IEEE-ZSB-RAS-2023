@@ -135,14 +135,6 @@ void takeUserOption_1(u8 *option){
 			break;
 	}
 }
-void takeUserOption_2(u8 *option){
-	while(1){
-		KPD_enu_GetKey(option);
-		if(*option >= 0 || *option <=360)
-			break;
-	}
-}
-
 
 u8 KPD_enu_GetNumberInput() {
     u8 inputLength = 0;
