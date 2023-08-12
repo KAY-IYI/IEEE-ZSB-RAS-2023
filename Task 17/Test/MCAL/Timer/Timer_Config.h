@@ -58,7 +58,7 @@ II-     Options For Required Prescaler:
 //#elif TIMER0_GENERATION_MODE == TIMER_CTC_MODE
 
     /*Set the Required Compare Match Value on TIMER0 CTC Mode*/
-#define TIMER0_CTC_VAL						125
+#define TIMER0_CTC_VAL						0
 
 /*  Set Timer0 CTC Interrupt
                      1- TIMER_DISABLE	
