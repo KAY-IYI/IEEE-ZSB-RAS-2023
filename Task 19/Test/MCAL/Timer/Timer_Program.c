@@ -168,7 +168,10 @@ ES_t Timers_enu_TIMER0SetCTC(u8 Copy_u8_CTC)
     TIMER0_U8_OCR0_REG = Copy_u8_CTC;
     return STD_TYPES_OK;
 }
-
+ES_t Timers_enu_TIMER1SetCTC(u8 Copy_u8_CTC){
+    TIMER1_U8_OCR1A_REG = Copy_u8_CTC;
+    return STD_TYPES_OK;
+}
 ES_t Timers_enu_TIMER0GetCounterValue(u8 *Copy_pu8_ReturnValue)
 {
     ES_t Local_u8_ErrorState = STD_TYPES_OK;
@@ -209,20 +212,20 @@ ES_t Timers_enu_SetCallBack(void (*Copy_pf_CallBackFunc)(void), u8 Copy_u8_Mode)
 //    return STD_TYPES_OK;
 //}
 
- ES_t Timers_enu_SetServoAngle(u8 Copy_u8_ServoAngle) {
-     ES_t Local_ErrorState = STD_TYPES_OK;
+//  ES_t Timers_enu_SetServoAngle(u8 Copy_u8_ServoAngle) {
+//      ES_t Local_ErrorState = STD_TYPES_OK;
 
-     // Check if the provided servo angle is within the valid range
-     if (Copy_u8_ServoAngle <= SERVO_MAX_ANGLE) {
-         // Calculate and set the value for Timer1 compare match register (OCR1A)
-         TIMER1_U8_OCR1A_REG = (1000 + (Copy_u8_ServoAngle * 1000UL) / SERVO_MAX_ANGLE) * 2;
-     } else {
-         // Servo angle is not within the valid range, set error state
-         Local_ErrorState = STD_TYPES_NOK;
-     }
+//      // Check if the provided servo angle is within the valid range
+//      if (Copy_u8_ServoAngle <= SERVO_MAX_ANGLE) {
+//          // Calculate and set the value for Timer1 compare match register (OCR1A)
+//          TIMER1_U8_OCR1A_REG = (1000 + (Copy_u8_ServoAngle * 1000UL) / SERVO_MAX_ANGLE) * 2;
+//      } else {
+//          // Servo angle is not within the valid range, set error state
+//          Local_ErrorState = STD_TYPES_NOK;
+//      }
 
-     return Local_ErrorState;
- }
+//      return Local_ErrorState;
+//  }
 /*TIMER0 Normal Mode ISR*/
 void __vector_11(void) __attribute__((signal));
 void __vector_11(void)

@@ -53,37 +53,37 @@ II-     Options For Required Prescaler:
 #define TIMER0_GENERATION_MODE TIMER_PWM_MODE
 
 /***    Choose Prescaler         *************/
-#define TIMER0_PRESCALER       TIMER_DIVISION_FACTOR_8
+#define TIMER0_PRESCALER TIMER_DIVISION_FACTOR_8
 
-//#if TIMER0_GENERATION_MODE == TIMER_NORMAL_MODE
+// #if TIMER0_GENERATION_MODE == TIMER_NORMAL_MODE
 
 /*Set the Required Preload on TIMER0 Normal Mode*/
 #define TIMER0_PRELOAD_VALUE 192
 
 #define TIMER0_OVERFLOW_INTERRUPT TIMER_DISABLE
 
-//#elif TIMER0_GENERATION_MODE == TIMER_CTC_MODE
+// #elif TIMER0_GENERATION_MODE == TIMER_CTC_MODE
 
 /*Set the Required Compare Match Value on TIMER0 CTC Mode*/
 #define TIMER0_CTC_VAL 0
 #define TIMER0_CTC_INTERRUPT TIMER_DISABLE
 
-//#elif TIMER0_GENERATION_MODE == TIMER_PWM_MODE
+// #elif TIMER0_GENERATION_MODE == TIMER_PWM_MODE
 
 /*Set the Required Compare Match Value on TIMER0 CTC Mode*/
 #define TIMER0_CTC_VAL 0
 /* Set PWM Mode*/
 #define TIMER0_CTC_PWM_MODE TIMER_FAST_PWM_INVERTING
 
-//#elif TIMER0_WAVEFORM_GENERATION_MODE == TIMER_FAST_PWM_MODE
+// #elif TIMER0_WAVEFORM_GENERATION_MODE == TIMER_FAST_PWM_MODE
 
 /*Set the Required Compare Match Value on TIMER0 CTC Mode*/
-#define TIMER0_CTC_VAL      0
+#define TIMER0_CTC_VAL 0
 
 /* Set PWM Mode*/
 #define TIMER0_CTC_PWM_MODE TIMER_FAST_PWM_INVERTING
 
-//#endif
+// #endif
 
 /***********************************************************************************************/
 /***********************************************************************************************/
@@ -164,8 +164,8 @@ Set Compare Match Output for OCR1A
  */
 #define TIMER1_CTCA_INTERRUPT TIMER_DISABLE
 
-/*Servo */
-#define MAX_PULSE_WIDTH 2000
-#define MIN_PULSE_WIDTH 1000
+// /*Servo */
+// #define MAX_PULSE_WIDTH 2000
+// #define MIN_PULSE_WIDTH 1000
 
 #endif

@@ -40,5 +40,6 @@ ES_t Timers_enu_SetCallBack                              (void(*Copy_pf_CallBack
 ES_t Timers_enu_Timer1Init                               (void);
 
 ES_t Timers_enu_SetServoAngle                            (u8 Copy_u8_ServoAngle);
+ES_t Timers_enu_TIMER1SetCTC                             (u8 Copy_u8_CTC)
 
 #endif
